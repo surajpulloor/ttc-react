@@ -15,8 +15,8 @@ class Board extends Component {
             ],
             n: 0,
             current: '',
-            finished: false,
-            started: false
+            started: false,
+            finished: false
         };
     }
 
@@ -28,21 +28,28 @@ class Board extends Component {
 
     handleClick = (i) => {
 
-        if (this.state.started && !this.state.finished) {
+        if (this.state.started) {
             const board = [...this.state.board];
             board[i] = this.state.current;
     
             this.setState(prevState => ({
                 board: board,
-                current: prevState.current === 'X' ? 'O' : 'X',
                 n: prevState.n + 1
             }), () => {
 
-                if (this.state.n === 8 || this.foundWinner(i)) {
+                let winnerFound = false;
 
-                    this.setState({
-                        finished: true
-                    }, this.resetState);
+                if ((winnerFound = this.foundWinner(i)) || this.state.n === 9) {
+
+                    this.setState(prevState => ({
+                        finished: prevState.n === 9 ? winnerFound : true,
+                        started: false
+                    }));
+
+                } else {
+                    this.setState(prevState => ({
+                        current: prevState.current === 'X' ? 'O' : 'X',
+                    }));
                 }
 
             });
@@ -107,7 +114,7 @@ class Board extends Component {
 
         let lower = null;
         let upper = null;
-        const cnt = 3;
+        let cnt = 3;
         
         if (i % 2 === 0) {
 
@@ -138,7 +145,7 @@ class Board extends Component {
                 };
 
             } else {
-                
+
                 // right diagonal
                 lower = 0;
                 upper = 8;
@@ -183,36 +190,64 @@ class Board extends Component {
 
     foundWinner = (i) => {
 
+        const hLimits = this.hCheck(i);
+        const wonH = this.findOut(hLimits);
+
+        const vLimits = this.vCheck(i);
+        const wonV = this.findOut(vLimits);
+
+        const dLimits = this.dCheck(i);
+
+
+        // check right diagonal
+        let wonRD = false;
+        
+        if (dLimits.hasOwnProperty('0')) {
+            wonRD = this.findOut(dLimits[0]);
+        }
+
+        // check right diagonal
+        let wonLD = false;
+
+        if (dLimits.hasOwnProperty('1')) {
+            wonLD = this.findOut(dLimits[2]);
+        }
+
+
+        return wonH || wonV || wonRD || wonLD;
+
     }
 
 
     findOut = (limit) => {
 
+        for (let i = limit.lower; i <= limit.upper; i += limit.cnt) {
+            if (this.state.board[i] !== this.state.current) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     start = () => {
-        if (!this.state.started) {
-            const pValue = prompt("Enter either X/O");
+        const pValue = prompt("Enter either X/O");
+
+        if (pValue === "X" || pValue === "O") {
             this.setState({
-                current: pValue,
+                board: [
+                    null, null, null,
+                    null, null, null,
+                    null, null, null
+                ],
+                n: 0,
                 started: true,
+                current: pValue,
                 finished: false
             });
-        } else {
-            this.resetState();
         }
-    }
-
-    resetState = () => {
-        this.setState({
-            board: [
-                null, null, null,
-                null, null, null,
-                null, null, null
-            ],
-            n: 0,
-            started: false
-        });
+            
+           
     }
 
 
