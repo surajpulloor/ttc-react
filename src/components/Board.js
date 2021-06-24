@@ -22,6 +22,19 @@ class Board extends Component {
     }
 
 
+    componentDidMount() {
+
+        document.addEventListener("keydown", (e) => {
+            if (e.keyCode >= 49 && e.keyCode <= 57) {
+                this.handleClick(e.keyCode - 48 - 1);
+            } else if (e.keyCode === 83) {
+                this.start();
+            }
+        });
+
+    }
+
+
     generateSquare = (i) => {
         return <Square sign={this.state.board[i]} onClick={() => this.handleClick(i)} />
     }
@@ -231,7 +244,8 @@ class Board extends Component {
     }
 
     start = () => {
-        const pValue = prompt("Enter either X/O").toUpperCase();
+        let pValue = prompt("Enter either X/O");
+        pValue = pValue ? pValue.toUpperCase() : "";
 
         if (pValue === "X" || pValue === "O") {
             this.setState({
