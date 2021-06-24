@@ -25,11 +25,15 @@ class Board extends Component {
     componentDidMount() {
 
         document.addEventListener("keydown", (e) => {
-            if (e.keyCode >= 49 && e.keyCode <= 57) {
-                this.handleClick(e.keyCode - 48 - 1);
+            //  Numbers above the alphabets  ||       The Numpad 
+            if (e.keyCode >= 49 && e.keyCode <= 57 || e.keyCode >= 97 && e.keyCode <= 105) {
+                const startKeyCode = e.keyCode < 97 ? 48 : 96;
+                this.handleClick(e.keyCode - startKeyCode - 1);
             } else if (e.keyCode === 83) {
                 this.start();
             }
+
+            return;
         });
 
     }
