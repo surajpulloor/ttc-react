@@ -29,7 +29,7 @@ class Board extends Component {
 
     handleClick = (i) => {
 
-        if (this.state.started) {
+        if (this.state.started && this.state.board[i] === null) {
             const board = [...this.state.board];
             board[i] = this.state.current;
     
