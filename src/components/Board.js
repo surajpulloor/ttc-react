@@ -117,74 +117,62 @@ class Board extends Component {
         let lower = null;
         let upper = null;
         let cnt = 3;
-        
-        if (i % 2 === 0) {
+    
+        if (i === 0 || i === 8) {
+            lower = 0;
+            upper = 8;
+            cnt = 4;
 
-            if (i === 0 || i === 8) {
-                lower = 0;
-                upper = 8;
-                cnt = 4;
-
-                return {
-                    0: {
-                        lower,
-                        upper,
-                        cnt
-                    }
-                };
-
-            } else if (i === 2 || i === 6) {
-                lower = 2;
-                upper = 6;
-                cnt = 2;
-
-                return {
-                    2: {
-                        lower,
-                        upper,
-                        cnt
-                    }
-                };
-
-            } else {
-
-                // right diagonal
-                lower = 0;
-                upper = 8;
-                cnt = 4;
-
-                const limits =  {
-                    0: {
-                        lower,
-                        upper,
-                        cnt
-                    }
-                };
-
-
-                // left diagonal
-                lower = 2;
-                upper = 6;
-                cnt = 2;
-
-                limits[2] = {
+            return {
+                0: {
                     lower,
                     upper,
                     cnt
                 }
-                
+            };
+
+        } else if (i === 2 || i === 6) {
+            lower = 2;
+            upper = 6;
+            cnt = 2;
+
+            return {
+                2: {
+                    lower,
+                    upper,
+                    cnt
+                }
+            };
+
+        } else {
+
+            // right diagonal
+            lower = 0;
+            upper = 8;
+            cnt = 4;
+
+            const limits =  {
+                0: {
+                    lower,
+                    upper,
+                    cnt
+                }
+            };
+
+
+            // left diagonal
+            lower = 2;
+            upper = 6;
+            cnt = 2;
+
+            limits[2] = {
+                lower,
+                upper,
+                cnt
             }
 
-           
+            return limits;
             
-
-        } 
-
-
-        return {
-            lower,
-            upper,
-            cnt
         }
 
     }
@@ -198,21 +186,31 @@ class Board extends Component {
         const vLimits = this.vCheck(i);
         const wonV = this.findOut(vLimits);
 
-        const dLimits = this.dCheck(i);
 
 
         // check right diagonal
         let wonRD = false;
-        
-        if (dLimits.hasOwnProperty('0')) {
-            wonRD = this.findOut(dLimits[0]);
-        }
 
+        
         // check right diagonal
         let wonLD = false;
 
-        if (dLimits.hasOwnProperty('1')) {
-            wonLD = this.findOut(dLimits[2]);
+
+        if (i % 2 === 0) {
+
+            const dLimits = this.dCheck(i);
+
+            
+            if (dLimits.hasOwnProperty('0')) {
+                wonRD = this.findOut(dLimits[0]);
+            }
+
+
+            if (dLimits.hasOwnProperty('2')) {
+                wonLD = this.findOut(dLimits[2]);
+            }
+
+
         }
 
 
