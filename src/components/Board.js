@@ -231,7 +231,7 @@ class Board extends Component {
     }
 
     start = () => {
-        const pValue = prompt("Enter either X/O");
+        const pValue = prompt("Enter either X/O").toUpperCase();
 
         if (pValue === "X" || pValue === "O") {
             this.setState({
