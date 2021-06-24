@@ -16,7 +16,8 @@ class Board extends Component {
             n: 0,
             current: '',
             started: false,
-            finished: false
+            finished: false,
+            winnerFound: false
         };
     }
 
@@ -41,10 +42,11 @@ class Board extends Component {
 
                 if ((winnerFound = this.foundWinner(i)) || this.state.n === 9) {
 
-                    this.setState(prevState => ({
-                        finished: prevState.n === 9 ? winnerFound : true,
+                    this.setState({
+                        winnerFound,
+                        finished: true,
                         started: false
-                    }));
+                    });
 
                 } else {
                     this.setState(prevState => ({
@@ -243,7 +245,8 @@ class Board extends Component {
                 n: 0,
                 started: true,
                 current: pValue,
-                finished: false
+                finished: false,
+                winnerFound: false
             });
         }
             
@@ -276,7 +279,7 @@ class Board extends Component {
                 </div>
 
                 {
-                    this.state.finished ?
+                    this.state.winnerFound ?
 
                     <h1>The Winner is: {this.state.current} </h1>
 
