@@ -275,6 +275,11 @@ class Board extends Component {
 
             <div className="board-with-controls">
                 <div className="board">
+                    
+                    <div className="non-horizontal-line"></div>
+                    <div className="horizontal-line"></div>
+
+
                     <div className="squares">
                         {this.generateSquare(0)}
                         {this.generateSquare(1)}
