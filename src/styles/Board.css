@@ -2,63 +2,20 @@ div.board-with-controls input {
     margin: 15px 0 15px 0;
 }
 
-/* second horizontal line
-    width: 260px;
-    height: 3px;
-    position: absolute;
-    top: 111px;
-    left: 114px; */
-
-/* third horizontal line
-    width: 260px;
-    height: 3px;
-    position: absolute;
-    top: 167px;
-    left: 114px; */
-
 div.horizontal-line {
 
     /* first horizontal line */
-    display: inline-block;
     background-color: red;
     width: 260px;
     height: 3px;
     position: absolute;
-    top: 53px;
     left: 114px;
     
 }
 
-/* left diagonal styles
-    width: 307px;
-    height: 3px;
-    transform: rotate(-40deg);
-    transform-origin: 259px 120px; */
-
-/* first vertical styles 
-    width: 200px;
-    height: 3px;
-    transform: rotate(90deg);
-    transform-origin: 21px 17px; */
-
-/* second vertical styles
-    width: 200px;
-    height: 3px;
-    transform: rotate( 90deg);
-    transform-origin: 54px 52px; */
-
-/* last vertical styles
-    width: 200px;
-    height: 3px;
-    transform: rotate( 90deg);
-    transform-origin: 90px 85px; */
 
 div.non-horizontal-line {
-    /* first diagonal line */
-    display: inline-block;
+    /* right diagonal line */
     background-color: red;
-    width: 307px;
     height: 3px;
-    transform: rotate(40deg);
-    transform-origin: -3px -19px;
 }
