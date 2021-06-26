@@ -101,20 +101,16 @@ class Board extends Component {
             lower = 0;
             upper = 2;
 
-            // top: 53px;
             y = 29;
         } else if (i >= 3 && i <= 5) {
             lower = 3;
             upper = 5;
-
-            // top: 111px;
 
             y = 88;
         } else if (i >= 6 && i <= 8) {
             lower = 6;
             upper = 8;
 
-            // top: 167px;
 
             y = 146;
         }
@@ -223,10 +219,6 @@ class Board extends Component {
                     upper,
                     cnt,
 
-                    // width: 307px;
-                    // transform: rotate(40deg);
-                    // transform-origin: -3px -19px;
-
                     line: {
                         x: -3,
                         y: -19,
@@ -242,10 +234,6 @@ class Board extends Component {
             lower = 2;
             upper = 6;
             cnt = 2;
-
-            //                 transform: rotate(-40deg);
-            // transform-origin: 259px 120px; */
-            // width: 307px;
 
             return {
                 2: {
@@ -436,7 +424,17 @@ class Board extends Component {
                 started: true,
                 current: pValue,
                 finished: false,
-                winnerFound: false
+                winnerFound: false,
+
+                line: {
+                    x: 0,
+                    y: 0,
+    
+                    width: 0,
+    
+                    angle: 0,
+                    isHorizontal: false
+                }
             });
         }
             
