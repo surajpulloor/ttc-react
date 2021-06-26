@@ -69,13 +69,13 @@ class Board extends Component {
 
                 if ((winObj = this.foundWinner(i)).foundWinner || this.state.n === 9) {
 
-                    this.setState({
+                    this.setState(state => ({
                         winnerFound: winObj.foundWinner,
                         finished: true,
                         started: false,
 
-                        line: winObj.limits
-                    });
+                        line: winObj.foundWinner ? winObj.limits : state.line
+                    }));
 
                 } else {
                     this.setState(prevState => ({
