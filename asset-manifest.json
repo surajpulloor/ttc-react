@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/ttc-react/static/css/main.9c36a80a.chunk.css",
-    "main.js": "/ttc-react/static/js/main.e7e19395.chunk.js",
-    "main.js.map": "/ttc-react/static/js/main.e7e19395.chunk.js.map",
+    "main.css": "/ttc-react/static/css/main.7470f685.chunk.css",
+    "main.js": "/ttc-react/static/js/main.828aee9e.chunk.js",
+    "main.js.map": "/ttc-react/static/js/main.828aee9e.chunk.js.map",
     "runtime-main.js": "/ttc-react/static/js/runtime-main.bfecd936.js",
     "runtime-main.js.map": "/ttc-react/static/js/runtime-main.bfecd936.js.map",
     "static/css/2.61b4cb56.chunk.css": "/ttc-react/static/css/2.61b4cb56.chunk.css",
@@ -12,14 +12,14 @@
     "static/js/3.0edd51d5.chunk.js.map": "/ttc-react/static/js/3.0edd51d5.chunk.js.map",
     "index.html": "/ttc-react/index.html",
     "static/css/2.61b4cb56.chunk.css.map": "/ttc-react/static/css/2.61b4cb56.chunk.css.map",
-    "static/css/main.9c36a80a.chunk.css.map": "/ttc-react/static/css/main.9c36a80a.chunk.css.map",
+    "static/css/main.7470f685.chunk.css.map": "/ttc-react/static/css/main.7470f685.chunk.css.map",
     "static/js/2.5d2fbf8b.chunk.js.LICENSE.txt": "/ttc-react/static/js/2.5d2fbf8b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.bfecd936.js",
     "static/css/2.61b4cb56.chunk.css",
     "static/js/2.5d2fbf8b.chunk.js",
-    "static/css/main.9c36a80a.chunk.css",
-    "static/js/main.e7e19395.chunk.js"
+    "static/css/main.7470f685.chunk.css",
+    "static/js/main.828aee9e.chunk.js"
   ]
 }
