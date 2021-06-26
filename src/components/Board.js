@@ -17,7 +17,17 @@ class Board extends Component {
             current: '',
             started: false,
             finished: false,
-            winnerFound: false
+            winnerFound: false,
+
+            line: {
+                x: 0,
+                y: 0,
+
+                width: 0,
+
+                angle: 0,
+                isHorizontal: false
+            }
         };
     }
 
@@ -55,14 +65,16 @@ class Board extends Component {
                 n: prevState.n + 1
             }), () => {
 
-                let winnerFound = false;
+                let winObj = {};
 
-                if ((winnerFound = this.foundWinner(i)) || this.state.n === 9) {
+                if ((winObj = this.foundWinner(i)).foundWinner || this.state.n === 9) {
 
                     this.setState({
-                        winnerFound,
+                        winnerFound: winObj.foundWinner,
                         finished: true,
-                        started: false
+                        started: false,
+
+                        line: winObj.limits
                     });
 
                 } else {
@@ -83,22 +95,46 @@ class Board extends Component {
         let upper = null;
         const cnt = 1;
 
+        let y = 0;
+
         if (i >= 0 && i <= 2) {
             lower = 0;
             upper = 2;
+
+            // top: 53px;
+            y = 29;
         } else if (i >= 3 && i <= 5) {
             lower = 3;
             upper = 5;
+
+            // top: 111px;
+
+            y = 88;
         } else if (i >= 6 && i <= 8) {
             lower = 6;
             upper = 8;
+
+            // top: 167px;
+
+            y = 146;
         }
 
 
         return {
             lower,
             upper,
-            cnt
+            cnt,
+
+            line: {
+                x: 0,
+                y,
+
+                width: 0,
+
+                angle: 0,
+
+                isHorizontal: true
+            }
         };
 
     }
@@ -108,23 +144,63 @@ class Board extends Component {
         let lower = null;
         let upper = null;
         const cnt = 3;
+        
+
+        const angle = 90;
+        let x = 0;
+        let y = 0;
+        const width = 197;
 
         if (i >= 0 && i <= 2) {
             lower = i;
             upper = i + 6;
+
         } else if (i >= 3 && i <= 5) {
             lower = i - 3;
             upper = i + 3;
+
+
         } else if (i >= 6 && i <= 8) {
             lower = i - 6;
             upper = i;
+
         }
+
+
+        // set the x & y
+        if ([0, 3, 6].indexOf(i) !== -1) {
+
+            x = 17;
+            y = 16;
+
+        } else if ([1, 4, 7].indexOf(i) !== -1) {
+
+            x = 50;
+            y = 52;
+
+        } else if ([2, 5, 8].indexOf(i) !== -1) {
+
+            
+            x = 87;
+            y = 85;
+            
+        }
+
 
 
         return {
             lower,
             upper,
-            cnt
+            cnt,
+
+            line: {
+                x,
+                y,
+                width,
+                angle,
+
+                isHorizontal: false
+            }
         };
 
     }
@@ -134,6 +210,7 @@ class Board extends Component {
         let lower = null;
         let upper = null;
         let cnt = 3;
+
     
         if (i === 0 || i === 8) {
             lower = 0;
@@ -144,7 +221,20 @@ class Board extends Component {
                 0: {
                     lower,
                     upper,
-                    cnt
+                    cnt,
+
+                    // width: 307px;
+                    // transform: rotate(40deg);
+                    // transform-origin: -3px -19px;
+
+                    line: {
+                        x: -3,
+                        y: -19,
+                        width: 307,
+                        angle: 40,
+        
+                        isHorizontal: false
+                    }
                 }
             };
 
@@ -153,11 +243,24 @@ class Board extends Component {
             upper = 6;
             cnt = 2;
 
+            //                 transform: rotate(-40deg);
+            // transform-origin: 259px 120px; */
+            // width: 307px;
+
             return {
                 2: {
                     lower,
                     upper,
-                    cnt
+                    cnt,
+
+                    line: {
+                        x: 259,
+                        y: 120,
+                        width: 307,
+                        angle: -40,
+        
+                        isHorizontal: false
+                    }
                 }
             };
 
@@ -172,7 +275,16 @@ class Board extends Component {
                 0: {
                     lower,
                     upper,
-                    cnt
+                    cnt,
+
+                    line: {
+                        x: -3,
+                        y: -19,
+                        width: 307,
+                        angle: 40,
+        
+                        isHorizontal: false
+                    }
                 }
             };
 
@@ -185,7 +297,16 @@ class Board extends Component {
             limits[2] = {
                 lower,
                 upper,
-                cnt
+                cnt,
+
+                line: {
+                    x: 259,
+                    y: 120,
+                    width: 307,
+                    angle: -40,
+    
+                    isHorizontal: false
+                }
             }
 
             return limits;
@@ -213,25 +334,78 @@ class Board extends Component {
         let wonLD = false;
 
 
+        let dLimits = null;
+
+
+        const limits = {
+            hLimits: hLimits.line,
+            vLimits: vLimits.line
+        }
+
+
         if (i % 2 === 0) {
 
-            const dLimits = this.dCheck(i);
+            dLimits = this.dCheck(i);
 
             
             if (dLimits.hasOwnProperty('0')) {
                 wonRD = this.findOut(dLimits[0]);
+
+                limits['rDLimits'] = dLimits[0].line;
             }
 
 
             if (dLimits.hasOwnProperty('2')) {
                 wonLD = this.findOut(dLimits[2]);
+
+                limits['lDLimits'] = dLimits[2].line;
             }
 
 
         }
 
+        
 
-        return wonH || wonV || wonRD || wonLD;
+        const winTypes = {
+            wonH,
+            wonV,
+
+            wonLD,
+            wonRD
+        }
+
+
+        return this.structureWinObj(winTypes, limits);
+
+    }
+
+
+    structureWinObj(winTypes, limits) {
+
+        const winObj = {
+            foundWinner: winTypes.wonH || winTypes.wonV || winTypes.wonRD || winTypes.wonLD
+        }
+
+        if (winTypes.wonH) {
+
+            winObj['limits'] = limits.hLimits
+
+        } else if (winTypes.wonV) {
+
+            winObj['limits'] = limits.vLimits
+
+        } else if (winTypes.wonRD) {
+
+            winObj['limits'] = limits.rDLimits
+
+        } else if (winTypes.wonLD) {
+
+            winObj['limits'] = limits.lDLimits
+
+        } 
+
+
+        return winObj;
 
     }
 
@@ -276,8 +450,20 @@ class Board extends Component {
             <div className="board-with-controls">
                 <div className="board">
                     
-                    <div className="non-horizontal-line"></div>
-                    <div className="horizontal-line"></div>
+                    <div className="non-horizontal-line" style={
+                        {
+                            display: this.state.winnerFound && !this.state.line.isHorizontal ? 'inline-block' : 'none',
+                            transform: `rotate(${this.state.line.angle}deg)`,
+                            transformOrigin: `${this.state.line.x}px ${this.state.line.y}px`,
+                            width: `${this.state.line.width}px`
+                        }
+                    }></div>
+                    <div className="horizontal-line" style={
+                        { 
+                            display: this.state.winnerFound && this.state.line.isHorizontal ? 'inline-block' : 'none',
+                            top: `${this.state.line.y}px`
+                        }
+                    }></div>
 
 
                     <div className="squares">
