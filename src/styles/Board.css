@@ -6,7 +6,7 @@ div.horizontal-line {
 
     /* first horizontal line */
     background-color: red;
-    width: 260px;
+    width: 230px;
     height: 3px;
     position: absolute;
     left: 114px;
