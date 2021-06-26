@@ -1,6 +1,10 @@
 .square {
     border: 1px solid black;
-    font-size: 53px;
-    margin-right: 9px;
-    padding: 0 58px;
+    font-size: 40px;
+    padding-left: 21px;
+    background: #ffbc83;
+    color: white;
+    display: inline-block;
+    width: 69px;
+    height: 58px;
 }
