@@ -101,18 +101,18 @@ class Board extends Component {
             lower = 0;
             upper = 2;
 
-            y = 29;
+            y = 44;
         } else if (i >= 3 && i <= 5) {
             lower = 3;
             upper = 5;
 
-            y = 88;
+            y = 103;
         } else if (i >= 6 && i <= 8) {
             lower = 6;
             upper = 8;
 
 
-            y = 146;
+            y = 161;
         }
 
 
