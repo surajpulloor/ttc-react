@@ -2,6 +2,23 @@ div.board-with-controls input {
     margin: 15px 0 15px 0;
 }
 
+@media only screen and (min-width: 991px) {
+    div.horizontal-line {
+        left: 114px;
+    }
+}
+
+@media only screen and (max-width: 726px) {
+
+    .container {
+        padding-left: 20px;
+    }
+
+    div.horizontal-line {
+        left: 8px;
+    }
+}
+
 div.horizontal-line {
 
     /* first horizontal line */
@@ -9,7 +26,6 @@ div.horizontal-line {
     width: 230px;
     height: 3px;
     position: absolute;
-    left: 114px;
     
 }
 
