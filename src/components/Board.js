@@ -145,7 +145,7 @@ class Board extends Component {
         const angle = 90;
         let x = 0;
         let y = 0;
-        const width = 197;
+        const width = 190;
 
         if (i >= 0 && i <= 2) {
             lower = i;
