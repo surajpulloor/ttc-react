@@ -1,0 +1,2 @@
+.container{padding-top:15px}.square{border:1px solid #000;font-size:38px;padding-left:20px;background:#ffbc83;color:#fff;display:inline-block;width:69px;height:58px}div.board-with-controls input{margin:15px 0}@media only screen and (min-width:991px){div.horizontal-line{left:114px}}@media only screen and (max-width:726px){.container{padding-left:20px}div.horizontal-line{left:8px}}div.horizontal-line{width:230px;position:absolute}div.horizontal-line,div.non-horizontal-line{background-color:red;height:3px}
+/*# sourceMappingURL=main.31e21d76.chunk.css.map */
