@@ -7,4 +7,5 @@
     display: inline-block;
     width: 69px;
     height: 58px;
+    user-select: none;
 }
